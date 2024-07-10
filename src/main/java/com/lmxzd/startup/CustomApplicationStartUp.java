@@ -25,7 +25,7 @@ public class CustomApplicationStartUp extends BufferingApplicationStartup {
 	@Override
 	public StartupStep start(String name) {
 		StartupStep start = super.start(name);
-		System.out.println(start.getName());
+		// System.out.println(start.getName());
 		return start;
 	}
 }

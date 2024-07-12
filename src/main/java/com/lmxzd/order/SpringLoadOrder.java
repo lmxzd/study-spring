@@ -1,5 +1,8 @@
 package com.lmxzd.order;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -13,98 +16,93 @@ import org.springframework.context.SmartLifecycle;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
+
 /**
  * @author zhangD
  * @since 2024/7/10
  */
-@Component
 public class SpringLoadOrder implements ApplicationContextAware, BeanFactoryAware, InitializingBean, SmartLifecycle,
 		                                    BeanNameAware, ApplicationListener<ContextRefreshedEvent>,
-		                                    CommandLineRunner, SmartInitializingSingleton,
-		                                    BeanPostProcessor, BeanFactoryPostProcessor {
+		                                    CommandLineRunner, SmartInitializingSingleton {
+	private static final Logger log = LoggerFactory.getLogger(SpringLoadOrder.class);
+
+	@PostConstruct
+	public void postConstruct() {
+		log.error("启动顺序:post-construct");
+	}
+
+	public void initMethod() {
+		log.error("启动顺序:init-method");
+	}
+
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		System.out.println("启动顺序:BeanFactoryAware");
+		log.info("启动顺序:BeanFactoryAware");
 	}
 
 	@Override
 	public void setBeanName(String name) {
-		System.out.println("启动顺序:BeanNameAware"+name);
+		log.info("启动顺序:BeanNameAware");
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println("启动顺序:InitializingBean");
+		log.info("启动顺序:InitializingBean.afterPropertiesSet");
 	}
 
 	@Override
 	public void afterSingletonsInstantiated() {
-		System.out.println("启动顺序:SmartInitializingSingleton");
+		log.info("启动顺序:SmartInitializingSingleton");
 	}
 
-	@Override
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		System.out.println("启动顺序:BeanFactoryPostProcessor");
-	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("启动顺序:CommandLineRunner");
+		log.info("启动顺序:CommandLineRunner");
 	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		System.out.println("启动顺序:ApplicationContextAware");
+		log.info("启动顺序:ApplicationContextAware");
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		System.out.println("启动顺序:ApplicationListener");
+		log.info("启动顺序:ApplicationListener");
 	}
 
 	@Override
 	public void start() {
-		System.out.println("启动顺序:SmartLifecycle.start");
+		log.info("启动顺序:SmartLifecycle.start");
 	}
 
 	@Override
 	public void stop() {
-		System.out.println("启动顺序:SmartLifecycle.stop");
+		log.info("启动顺序:SmartLifecycle.stop");
 	}
 
 	@Override
 	public boolean isRunning() {
-		System.out.println("启动顺序:SmartLifecycle.isRunning");
+		log.info("启动顺序:SmartLifecycle.isRunning");
 		return false;
 	}
 
 	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("启动顺序:BeanPostProcessorBefore"+beanName);
-		return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
-	}
-
-	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("启动顺序:BeanPostProcessorAfter"+beanName);
-		return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
-	}
-
-	@Override
 	public boolean isAutoStartup() {
-		System.out.println("启动顺序:SmartLifecycle.isAutoStartup");
-		return SmartLifecycle.super.isAutoStartup();
+		log.info("启动顺序:SmartLifecycle.isAutoStartup");
+		return false;
 	}
 
 	@Override
 	public void stop(Runnable callback) {
-		System.out.println("启动顺序:SmartLifecycle.stop(callback)");
-		SmartLifecycle.super.stop(callback);
+		log.info("启动顺序:SmartLifecycle.stop(callback)");
 	}
 
 	@Override
 	public int getPhase() {
-		System.out.println("启动顺序:SmartLifecycle.getPhase");
-		return SmartLifecycle.super.getPhase();
+		log.info("启动顺序:SmartLifecycle.getPhase");
+		return 0;
 	}
 }

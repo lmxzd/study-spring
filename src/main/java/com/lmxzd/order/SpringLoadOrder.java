@@ -1,10 +1,12 @@
 package com.lmxzd.order;
 
 
+import com.lmxzd.bean.Bean1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -17,6 +19,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 
 /**
@@ -28,8 +31,13 @@ public class SpringLoadOrder implements ApplicationContextAware, BeanFactoryAwar
 		                                    CommandLineRunner, SmartInitializingSingleton {
 	private static final Logger log = LoggerFactory.getLogger(SpringLoadOrder.class);
 
+
+	@Resource
+	private Bean1 bean1;
+
 	@PostConstruct
 	public void postConstruct() {
+		log.error("启动顺序:bean1:{}", bean1);
 		log.error("启动顺序:post-construct");
 	}
 

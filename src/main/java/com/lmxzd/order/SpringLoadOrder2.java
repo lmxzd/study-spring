@@ -19,6 +19,10 @@ public class SpringLoadOrder2 implements BeanPostProcessor{
 	private static final Logger log = LoggerFactory.getLogger(SpringLoadOrder2.class);
 
 
+	@PostConstruct
+	public void postConstruct() {
+		log.error("启动顺序:post-construct");
+	}
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

@@ -1,5 +1,6 @@
 package com.lmxzd;
 
+import com.lmxzd.eventMechanism.listener.CustomEventListener;
 import com.lmxzd.startup.CustomApplicationStartUp;
 import org.springframework.boot.ApplicationContextFactory;
 import org.springframework.boot.SpringApplication;
@@ -27,8 +28,10 @@ import java.util.function.Supplier;
 public class StudyApplication {
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication(StudyApplication.class);
+		springApplication.addListeners();
 		springApplication.setWebApplicationType(WebApplicationType.SERVLET);
 		springApplication.setApplicationStartup(new CustomApplicationStartUp(10));
+		springApplication.addInitializers();
 		springApplication.run(args);
 
 	}

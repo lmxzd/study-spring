@@ -1,5 +1,6 @@
 package com.lmxzd.config;
 
+import com.lmxzd.aware.ConfigurationConfigAware;
 import com.lmxzd.bean.Bean1;
 import com.lmxzd.bean.Bean3;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @since 2024/7/5
  */
 @Component
-@Import(ConfigurationConfig.class)
+@Import(ConfigurationConfigAware.class)
 @PropertySources({@PropertySource(value = "classpath:config\\application2.properties"),@PropertySource(value = "classpath:application.properties")})
 public class ComponentConfig {
 

@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.metrics.ApplicationStartup;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.function.Supplier;
@@ -21,6 +23,7 @@ import java.util.function.Supplier;
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class})
 @ImportResource(locations = "classpath:SpringContext.xml")
+@EnableCaching
 public class StudyApplication {
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication(StudyApplication.class);

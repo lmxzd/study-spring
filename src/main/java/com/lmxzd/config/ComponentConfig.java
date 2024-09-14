@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Import(ConfigurationConfigAware.class)
-@PropertySources({@PropertySource(value = "classpath:config\\application2.properties"),@PropertySource(value = "classpath:application.properties")})
+@PropertySources({@PropertySource(value = "classpath:config\\application2.properties"),
+		@PropertySource(value = "classpath:application.yaml", factory = YamlPropertySourceFactory.class)})
 public class ComponentConfig {
 
 	@Bean

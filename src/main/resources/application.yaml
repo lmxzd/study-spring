@@ -1,0 +1,60 @@
+logging:
+    config: classpath:log4j2.xml
+management:
+    endpoints:
+        web:
+            base-path: /actuator
+            exposure:
+                include: '*'
+    server:
+        port: 8081
+mybatis:
+    lazy-initialization: true
+redis:
+    host: localhost
+    maxIdle: 8
+    maxTotal: 8
+    minIdle: 1
+    password: ''
+    port: 6379
+server:
+    port: 8080
+
+
+some:
+    property: '"3"'
+spring:
+    redis:
+        host: localhost
+        lettuce:
+            pool:
+                max-active: 8
+                max-idle: 8
+                max-wait: -1ms
+                min-idle: 1
+        password: ''
+        port: 6379
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
+        #虚拟host
+        virtual-host: virtual01
+        template:
+            #当mandatory设置为true时，交换器无法根据自身的类型和路由键找到一个符合条件的队列，那么RabbitMQ会调用Basic.Return命令将消息返回给生产者。当为false时，则直接丢弃消息
+            mandatory: true
+        #生产者回调确认机制，由回调来确定消息是否发布成功
+        publisher-confirm-type: correlated
+        #是否开启生产者returns
+        publisher-returns: true
+        listener:
+            simple:
+                #手动回复方式，一般建议手动回复，即需要我们自己调用对应的ACK方法
+                acknowledge-mode: manual
+                #每个消费者可拉取的，还未ack的消息数量
+                prefetch: 10
+                #消费端（每个Listener）的最小线程数
+                concurrency: 3
+                #消费端（每个Listener）的最大线程数
+                max-concurrency: 10

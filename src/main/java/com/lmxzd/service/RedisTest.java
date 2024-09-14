@@ -16,9 +16,9 @@ public class RedisTest {
 	private RedisTemplate<Object, Object> redisTemplate;
 
 
-	@Scheduled(cron = "0/5 * * * * ?")
-	private void test() {
-		redisTemplate.opsForValue().set("test","1");
-		System.out.println(redisTemplate.opsForValue().get("test"));
-	}
+	// @Scheduled(cron = "0/5 * * * * ?")
+	// private void test() {
+	// 	redisTemplate.opsForValue().set("test","1");
+	// 	System.out.println(redisTemplate.opsForValue().get("test"));
+	// }
 }

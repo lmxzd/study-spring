@@ -2,6 +2,7 @@ package com.lmxzd.eventMechanism.listener;
 
 import com.lmxzd.eventMechanism.CustomEvent;
 import org.springframework.beans.BeansException;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationListener;
@@ -21,6 +22,8 @@ public class CustomEventListener implements ApplicationContextAware {
 	public void onApplicationEvent(CustomEvent event) {
 		System.out.println("接收到自定义事件: " + event.getMessage());
 		System.out.println(applicationContext.getBean("bean1"));
+
+		CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
 
 	}
 

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
  * @since 2024/7/13
  */
 @Component
-public class entity {
+public class Entity {
 }

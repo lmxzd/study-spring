@@ -2,6 +2,7 @@ package com.lmxzd.config.redis;
 
 import com.lmxzd.cache.service.IManualCache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @since 2024/8/12
  */
 @Service
+@EnableCaching
 public class RedisCache implements IManualCache<String, Object> {
 
 	private RedisTemplate<Object, Object> redisTemplate;
